@@ -47,7 +47,9 @@ extension Alamofire.Request {
       return response(responseSerializer: serializer, completionHandler: completionHandler)
   }
 
-  public func responseArray<T: ResponseJSONObjectSerializable>(completionHandler: Response<[T], NSError> -> Void) -> Self {
+  public func responseArray<T: ResponseJSONObjectSerializable>(completionHandler: Response<[T], NSError> -> Void) -> Self
+  {
+      // set var serializer to array of gist objects.
       let serializer = ResponseSerializer<[T], NSError> { request, response, data, error in
         guard error == nil else {
           return .Failure(error!)
@@ -77,7 +79,8 @@ extension Alamofire.Request {
           return .Failure(error)
         }
       }
-      
+    
+      // return alamofire response of serialized gist array.
       return response(responseSerializer: serializer, completionHandler: completionHandler)
   }
   
